@@ -16,20 +16,29 @@ let game = document.getElementById('game'),
 minNum.textContent = min;
 maxNum.textContent = max;
 
-guessBtn.addEventListener('click',function(){
+guessBtn.addEventListener('click', function () {
 
     let guess = parseInt(guessInput.value);
     console.log(guess);
 
     //Validation
-    if(isNaN(guess)||guess<min||guess>max){
-        setMessage(`Please Enter a Number between ${min} and ${max}`,'red');
+    if (isNaN(guess) || guess < min || guess > max) {
+        setMessage(`Please Enter a Number between ${min} and ${max}`, 'red');
+
+    }
+    //check if won, if yes disable input field, green border on input field as visual cue and message
+    if(guess===winningNum){
+        guessInput.disabled=true;
+        guessInput.style.borderColor='green';
+        setMessage(`${winningNum} is correct! YOU ARE WINNER!`,'green');
+
+    } else {
 
     }
 });
 
-function setMessage(msg,color){
-    message.style.color=color;
-    message.textContent=msg;
+function setMessage(msg, color) {
+    message.style.color = color;
+    message.textContent = msg;
 
 }
