@@ -28,11 +28,29 @@ guessBtn.addEventListener('click', function () {
     }
     //check if won, if yes disable input field, green border on input field as visual cue and message
     if(guess===winningNum){
+        //game over - won
+
         guessInput.disabled=true;
         guessInput.style.borderColor='green';
         setMessage(`${winningNum} is correct! YOU ARE WINNER!`,'green');
 
     } else {
+        //Wrong number
+        guessesLeft-= 1;
+        if(guessesLeft===0){
+            //Game Over - lost
+            guessInput.disabled=true;
+            guessInput.style.borderColor='red';
+            setMessage(`${guess} is WRONG! ${winningNum} is the right number.`,'red');
+    
+        } else {
+            //set loser border-color ferrari red
+            guessInput.style.borderColor='red';
+            //clear input
+            guessInput.value='';
+            //Game continues - answer wrong
+            setMessage(`${guess} is not correct, ${guessesLeft} guesses left!`,'red');
+        }
 
     }
 });
